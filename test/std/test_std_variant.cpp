@@ -1,55 +1,8 @@
 #include "catch2/catch.hpp"
-#include <any>
-#include <optional>
 #include <variant>
+#include <vector>
 
 using namespace std;
-
-SCENARIO("Test std::any") {
-    GIVEN("An any object") {
-        any a = 1;
-        REQUIRE(any_cast<int>(a) == 1);
-        REQUIRE_THROWS_AS(any_cast<float>(a), bad_any_cast);
-    }
-
-    GIVEN("An any object with a string") {
-        any a = string("hello");
-        REQUIRE(any_cast<string>(a) == "hello");
-        REQUIRE(any_cast<string>(&a) != nullptr);
-    }
-}
-
-SCENARIO("Test std::optional") {
-    GIVEN("An empty optional object") {
-        optional<int> o;
-        REQUIRE_FALSE(o.has_value());
-    }
-
-    GIVEN("An optional object") {
-        optional<int> o = 1;
-        REQUIRE(o.has_value());
-        REQUIRE(*o == 1);
-    }
-
-    GIVEN("An optional object could be reset") {
-        optional<string> o = "hello";
-        REQUIRE(o.has_value());
-        o.reset();
-        REQUIRE_FALSE(o.has_value());
-    }
-
-    GIVEN("An optional object could be value_or") {
-        optional<string> o = "hello";
-        REQUIRE(o.has_value());
-        
-        auto str = o.value_or("world");
-        REQUIRE(str == "hello");
-
-        o.reset();
-        str = o.value_or("world");
-        REQUIRE(str == "world");
-    }
-}
 
 SCENARIO("Test std::variant") {
     GIVEN("A variant object") {
@@ -146,7 +99,7 @@ SCENARIO("Test static dispatching by std::variant") {
         REQUIRE(a.sound() == "meow");
     }
 
-    GIVEN("An animal container dispatching by std::variant") {
+    GIVEN("An animal container") {
         vector<Aminal> animals;
         animals.emplace_back(Dog());
         animals.emplace_back(Cat());
