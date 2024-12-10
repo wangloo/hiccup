@@ -84,4 +84,11 @@ TEST_CASE( "Test Object Allocator" ) {
         REQUIRE(fooAllocator.GetAvailableSize() == 4);
     }
 
+    SECTION( "should only move object allocator" ) {
+        ObjectAllocator<Foo> fooAllocator1{FOO_MAX};
+        ObjectAllocator<Foo> fooAllocator2{std::move(fooAllocator1)};
+
+        REQUIRE(fooAllocator1.GetAvailableSize() == 0);
+        REQUIRE(fooAllocator2.GetAvailableSize() == FOO_MAX);
+    }
 }

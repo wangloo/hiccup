@@ -1,5 +1,6 @@
 #include "catch2/catch.hpp"
 #include "hiccup/infra/link.h"
+#include <iostream>
 
 using namespace hiccup;
 
@@ -123,5 +124,22 @@ TEST_CASE( "Test Link" ) {
         REQUIRE(link.end().value() != &elem);
         Link<Foo>::Iterator p = link.begin();
         REQUIRE(link.next_of(p) == link.end());
+    }
+
+    SECTION( "should only move link" ) {
+        Link<Foo> link1;
+        
+        Foo elem1(1), elem2(2), elem3(3);
+
+        link1.push_back(elem1);
+        link1.push_back(elem2);
+        link1.push_back(elem3);
+
+        Link<Foo> link2{std::move(link1)};
+
+        REQUIRE(link1.empty());
+        REQUIRE(link2.size() == 3);
+        REQUIRE(link2.front()->value() == 1);
+        REQUIRE(link2.back()->value() == 3);
     }
 }

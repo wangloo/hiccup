@@ -23,6 +23,9 @@ public:
         }
     }
 
+	ObjectAllocator(ObjectAllocator&&) noexcept = default;
+	ObjectAllocator& operator=(ObjectAllocator&&) noexcept = default;
+
     ~ObjectAllocator() {
         while (!elems_.empty()) {
             auto elem = (Element*)(elems_.pop_front());
@@ -34,6 +37,7 @@ public:
     T* Alloc() {
         Element *elem = (Element*) (elems_.pop_front());
         if (!elem) elem = new (std::nothrow) Element;
+		assert(elem && "Out of memory");
         return (T*) (elem->buff_);
     }
 
@@ -45,7 +49,9 @@ public:
     // Alloc memory and construct !!!
     template<class ... Args>
     T* New(Args &&... args) {
-        return new (Alloc()) T(std::forward<Args>(args)...);
+		T *elem = Alloc();
+		assert(elem && "Out of memory");
+		return new(elem) T(std::forward<Args>(args)...);
     }
 
     // Free memory and destruct !!!

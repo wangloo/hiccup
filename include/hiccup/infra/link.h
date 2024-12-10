@@ -19,7 +19,7 @@ struct Link {
                 elem_(0), next_(0) {
         }
 
-        Iterator(T *elem) noexcept :
+        explicit Iterator(T *elem) noexcept :
                 elem_(elem), next_(next_of(elem)) {
         }
 
@@ -94,7 +94,7 @@ struct Link {
                 elem_(0), next_(0) {
         }
 
-        ReverseIterator(T *elem) noexcept :
+        explicit ReverseIterator(T *elem) noexcept :
                 elem_(elem), next_(next_of(elem)) {
         }
 
@@ -187,19 +187,19 @@ struct Link {
     }
 
     Iterator begin() const {
-        return head_.next_;
+        return Iterator{head_.next_};
     }
 
     Iterator end() const {
-        return const_cast<T*>(sentinel());
+        return Iterator{const_cast<T*>(sentinel())};
     }
 
     ReverseIterator rbegin() const {
-        return head_.prev_;
+        return ReverseIterator{head_.prev_};
     }
 
     ReverseIterator rend() const {
-        return const_cast<T*>(sentinel());
+        return ReverseIterator{const_cast<T*>(sentinel())};
     }
 
     bool is_back(T *elem) const {
