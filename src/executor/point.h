@@ -11,7 +11,7 @@
 namespace hiccup {
 
 struct Point {
-	Point();
+	Point() = default;
 	Point(int x, int y);
 
 	__INLINE_EQUALS(Point) {
