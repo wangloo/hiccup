@@ -21,6 +21,19 @@ class OptionalPtr {
 public:
     explicit OptionalPtr(T* ptr) : ptr_(ptr) {}
 
+    OptionalPtr(OptionalPtr&& other) noexcept 
+    : ptr_(other.ptr_) {
+        other.ptr_ = nullptr;
+    }
+
+    OptionalPtr& operator=(OptionalPtr&& other) noexcept {
+        if (this != &other) {
+            ptr_ = other.ptr_;
+            other.ptr_ = nullptr;
+        }
+        return *this;
+    }
+
     bool HasValue() const { return ptr_ != nullptr; }
     explicit operator bool() const { return HasValue(); }
     T* Get() { return ptr_; }
@@ -57,6 +70,19 @@ template<typename T>
 class OptionalPtr<const T, SyncMode::None> {
 public:
     explicit OptionalPtr(const T* ptr) : ptr_(ptr) {}
+
+    OptionalPtr(OptionalPtr&& other) noexcept 
+    : ptr_(other.ptr_) {
+        other.ptr_ = nullptr;
+    }
+
+    OptionalPtr& operator=(OptionalPtr&& other) noexcept {
+        if (this != &other) {
+            ptr_ = other.ptr_;
+            other.ptr_ = nullptr;
+        }
+        return *this;
+    }
 
     bool HasValue() const { return ptr_ != nullptr; }
     explicit operator bool() const { return HasValue(); }
@@ -97,13 +123,19 @@ public:
     : lock_(mtx), ptr_(ptr) {
     }
 
-    ~OptionalPtr() = default;
+    OptionalPtr(OptionalPtr&& other) noexcept 
+    : lock_(std::move(other.lock_)), ptr_(other.ptr_) {
+        other.ptr_ = nullptr;
+    }
 
-    OptionalPtr(const OptionalPtr& other) = delete;
-    OptionalPtr& operator=(const OptionalPtr& other) = delete;
-
-    OptionalPtr(OptionalPtr&& other) noexcept = default;
-    OptionalPtr& operator=(OptionalPtr&& other) noexcept = default;
+    OptionalPtr& operator=(OptionalPtr&& other) noexcept {
+        if (this != &other) {
+            lock_ = std::move(other.lock_);
+            ptr_ = other.ptr_;
+            other.ptr_ = nullptr;
+        }
+        return *this;
+    }
 
     bool HasValue() const { return ptr_ != nullptr; }
     explicit operator bool() const { return HasValue(); }
@@ -145,14 +177,19 @@ public:
     : lock_(mtx), ptr_(ptr)  {
     }
 
-    ~OptionalPtr() = default;
+    OptionalPtr(OptionalPtr&& other) noexcept 
+    : lock_(std::move(other.lock_)), ptr_(other.ptr_) {
+        other.ptr_ = nullptr;
+    }
 
-    OptionalPtr(const OptionalPtr& other) = delete;
-    OptionalPtr& operator=(const OptionalPtr& other) = delete;
-
-    OptionalPtr(OptionalPtr&& other) noexcept = default;
-    OptionalPtr& operator=(OptionalPtr&& other) noexcept = default;
-
+    OptionalPtr& operator=(OptionalPtr&& other) noexcept {
+        if (this != &other) {
+            lock_ = std::move(other.lock_);
+            ptr_ = other.ptr_;
+            other.ptr_ = nullptr;
+        }
+        return *this;
+    }
 
     bool HasValue() const { return ptr_ != nullptr; }
     explicit operator bool() const { return HasValue(); }
