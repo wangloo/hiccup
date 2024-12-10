@@ -24,11 +24,11 @@ TEST_CASE( "Test Type Id" ) {
     }
 
     SECTION( "should get the same id for the same type" ) {
-        REQUIRE(TypeIdOf<Foo>() == TypeIdOf<Foo>());
-        REQUIRE(TypeIdOf<Bar>() == TypeIdOf<Bar>());
+        static_assert(TypeIdOf<Foo>() == TypeIdOf<Foo>(), "Foo");
+        static_assert(TypeIdOf<Bar>() == TypeIdOf<Bar>(), "Bar");
     }
 
     SECTION( "should get different id for different type" ) {
-        REQUIRE(TypeIdOf<Foo>() != TypeIdOf<Bar>());
+        static_assert(TypeIdOf<Foo>() != TypeIdOf<Bar>(), "Foo != Bar");
     }
 }
