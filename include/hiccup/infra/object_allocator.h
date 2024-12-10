@@ -23,15 +23,17 @@ public:
         }
     }
 
-	ObjectAllocator(ObjectAllocator&&) noexcept = default;
-	ObjectAllocator& operator=(ObjectAllocator&&) noexcept = default;
-
     ~ObjectAllocator() {
         while (!elems_.empty()) {
             auto elem = (Element*)(elems_.pop_front());
             if (elem) delete elem;
         }
     }
+	
+	// Destructor has removed the rvalue constructor and assignment operator implicitly.
+	// So we need to add them back.
+	ObjectAllocator(ObjectAllocator&&) noexcept = default;
+	ObjectAllocator& operator=(ObjectAllocator&&) noexcept = default;
 
     // Alloc memory but do not construct !!!
     T* Alloc() {
