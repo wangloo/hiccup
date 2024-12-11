@@ -5,26 +5,21 @@
 #ifndef POINT_H
 #define POINT_H
 
-#include "hiccup/infra/eq_helper.h"
-#include <string>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-namespace hiccup {
+typedef struct Point {
+	int x;
+	int y;
+} Point;
 
-struct Point {
-	Point() = default;
-	Point(int x, int y);
+Point PointNew(int x, int y);
+bool PointEquals(const Point*, const Point*);
+const char* PointToString(const Point*);
 
-	__INLINE_EQUALS(Point) {
-        return __FIELD_EQ(x) && __FIELD_EQ(y);
-    }
-
-	std::string ToString() const;
-
-private:
-	int x{0};
-	int y{0};
-};
-
+#ifdef __cplusplus
 }
+#endif
 
 #endif

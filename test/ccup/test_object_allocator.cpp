@@ -1,7 +1,7 @@
 #include "catch2/catch.hpp"
-#include "hiccup/infra/object_allocator.h"
+#include "hiccup/ccup/object_allocator.h"
 
-using namespace hiccup;
+using namespace ccup;
 
 namespace {
     struct Foo: LinkNode<Foo> {
@@ -56,7 +56,7 @@ TEST_CASE( "Test Object Allocator" ) {
         REQUIRE(fooAllocator.GetAvailableSize() == FOO_MAX);
     }
 
-    SECTION( "should extend auto" ) {
+    SECTION( "should scale auto" ) {
         Foo *foos[FOO_MAX + 1] = { nullptr };
 
         for (size_t i = 0; i < FOO_MAX; i++) {

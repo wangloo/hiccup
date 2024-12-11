@@ -1,19 +1,21 @@
 #include "catch2/catch.hpp"
 #include "executor/point.h"
 
-using namespace hiccup;
-
 TEST_CASE( "Test Point" ) {
     SECTION( "should compare point" ) {
-        Point p1(1, 2);
-        Point p2(1, 2);
-        Point p3(2, 3);
-        REQUIRE(p1 == p2);
-        REQUIRE(p1 != p3);
+        Point p1 = PointNew(1, 2);
+        Point p2 = PointNew(1, 2);
+        Point p3 = PointNew(2, 3);
+
+        REQUIRE(PointEquals(&p1, &p2));
+        REQUIRE(!PointEquals(&p1, &p3));
     }
 
     SECTION( "should convert point to string" ) {
-        Point p(1, 2);
-        REQUIRE(p.ToString() == "(1, 2)");
+        Point p = PointNew(1, 2);
+        const char* str = PointToString(&p);
+        REQUIRE(str != NULL);
+        REQUIRE(strcmp(str, "(1, 2)") == 0);
+        free((void*)str);
     }
 }

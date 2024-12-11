@@ -1,8 +1,8 @@
 #include "catch2/catch.hpp"
-#include "hiccup/infra/link.h"
+#include "hiccup/ccup/link.h"
 #include <iostream>
 
-using namespace hiccup;
+using namespace ccup;
 
 namespace {
     struct Foo : LinkNode<Foo> {

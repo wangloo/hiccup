@@ -5,11 +5,11 @@
 #ifndef LINK_H
 #define LINK_H
 
-#include "hiccup/infra/link_node.h"
+#include "hiccup/ccup/link_node.h"
 #include <stddef.h>
 #include <new>
 
-namespace hiccup {
+namespace ccup {
 
 template<typename T>
 struct Link {

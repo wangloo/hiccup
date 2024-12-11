@@ -7,7 +7,7 @@
 
 #include <new>
 
-namespace hiccup {
+namespace ccup {
 
 template <typename T>
 struct Placement {

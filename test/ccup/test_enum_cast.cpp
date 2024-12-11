@@ -1,7 +1,7 @@
 #include "catch2/catch.hpp"
-#include "hiccup/infra/enum_cast.h"
+#include "hiccup/ccup/enum_cast.h"
 
-using namespace hiccup;
+using namespace ccup;
 
 namespace {
     enum class TestEnum {

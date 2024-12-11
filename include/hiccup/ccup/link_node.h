@@ -5,7 +5,7 @@
 #ifndef LINK_NODE_H
 #define LINK_NODE_H
 
-namespace hiccup {
+namespace ccup {
 
 template<typename T> struct List;
 

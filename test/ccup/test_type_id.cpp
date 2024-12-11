@@ -1,7 +1,7 @@
 #include "catch2/catch.hpp"
-#include "hiccup/infra/type_id.h"
+#include "hiccup/ccup/type_id.h"
 
-using namespace hiccup;
+using namespace ccup;
 
 namespace {
     struct Foo {
@@ -20,15 +20,15 @@ TEST_CASE( "Test Type Id" ) {
         static_assert(TypeIdOf<float>() == TypeIdOf<float>(), "float");
         static_assert(TypeIdOf<double>() == TypeIdOf<double>(), "double");
         static_assert(TypeIdOf<void>() == TypeIdOf<void>(), "void");
-        static_assert(TypeIdOf<int>() != TypeIdOf<char>(), "int != char");
     }
 
-    SECTION( "should get the same id for the same type" ) {
+    SECTION( "should get the same id for the struct type" ) {
         static_assert(TypeIdOf<Foo>() == TypeIdOf<Foo>(), "Foo");
         static_assert(TypeIdOf<Bar>() == TypeIdOf<Bar>(), "Bar");
     }
 
     SECTION( "should get different id for different type" ) {
-        static_assert(TypeIdOf<Foo>() != TypeIdOf<Bar>(), "Foo != Bar");
+        REQUIRE(TypeIdOf<int>() != TypeIdOf<char>());
+        REQUIRE(TypeIdOf<Foo>() != TypeIdOf<Bar>());
     }
 }

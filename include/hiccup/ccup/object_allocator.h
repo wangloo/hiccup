@@ -5,10 +5,10 @@
 #ifndef OBJECT_ALLOCATOR_H
 #define OBJECT_ALLOCATOR_H
 
-#include "hiccup/infra/link.h"
+#include "hiccup/ccup/link.h"
 #include <new>
 
-namespace hiccup {
+namespace ccup {
 
 template<typename T>
 class ObjectAllocator {

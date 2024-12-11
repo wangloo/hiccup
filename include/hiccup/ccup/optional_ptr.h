@@ -8,7 +8,7 @@
 #include <shared_mutex>
 #include <utility>
 
-namespace hiccup
+namespace ccup
 { 
 
 enum class SyncMode {

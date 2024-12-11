@@ -5,7 +5,7 @@
 #ifndef UNIQUE_NAME_H
 #define UNIQUE_NAME_H
 
-namespace hiccup {
+namespace ccup {
 
 #define __DO_STRINGIZE( symbol ) #symbol
 #define _STRINGIZE(symbol) __DO_STRINGIZE(symbol)

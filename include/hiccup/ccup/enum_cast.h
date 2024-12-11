@@ -7,7 +7,7 @@
 
 #include <type_traits>
 
-namespace hiccup {
+namespace ccup {
 
 template<typename E>
 constexpr auto enum_id_cast(E e) noexcept {

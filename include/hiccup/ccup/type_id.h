@@ -5,7 +5,7 @@
 #ifndef TYPE_ID_H
 #define TYPE_ID_H
 
-namespace hiccup {
+namespace ccup {
 
 template <typename T>
 struct TypeIdGenerator {

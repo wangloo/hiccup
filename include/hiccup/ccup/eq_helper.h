@@ -5,7 +5,7 @@
 #ifndef EQ_HELPER_H
 #define EQ_HELPER_H
 
-namespace hiccup {
+namespace ccup {
 
 //////////////////////////////////////////////////////////////
 #define __DECL_EQUALS(cls)                \
