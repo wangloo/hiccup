@@ -8,6 +8,7 @@ Hiccup, training the C++ dragon.
 - MacOS / Linux / Windows + WSL / Windows + MinGW
 - CMake，版本不低于 3.10；
 - gcc 或 clang 编译器及标准库(支持C++17），工具链安装见下；
+- IDE：VSCode(安装 C++ 插件) / CLion / Eclipse-CDT 均可；
 
 ### macOS
 
