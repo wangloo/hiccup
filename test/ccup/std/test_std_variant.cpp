@@ -1,14 +1,20 @@
 #include "catch2/catch.hpp"
 #include <variant>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
 SCENARIO("Test std::variant") {
     GIVEN("A variant object") {
+
         variant<int, float> v = 1;
         REQUIRE(get<int>(v) == 1);
         REQUIRE_THROWS_AS(get<float>(v), bad_variant_access);
+
+        v = 1.0f;
+        REQUIRE(get<float>(v) == 1.0f);
+        REQUIRE_THROWS_AS(get<int>(v), bad_variant_access);
     }
 
     GIVEN("A variant object with a float") {
@@ -51,6 +57,27 @@ SCENARIO("Test std::variant") {
             }
         }, v);
         REQUIRE(result == "float");
+    }
+}
+
+
+struct Triangle {
+    void draw() const {
+        std::cout << "△" << std::endl;
+    }
+};
+
+struct Circle {
+    void draw() const {
+        std::cout << "○" << std::endl;
+    }
+};
+
+TEST_CASE("Test std::variant with polymorphic behavior") {
+    using Shape = std::variant<Triangle, Circle>;
+    std::vector<Shape> shapes {Circle{}, Triangle{}};
+    for (const auto &shape : shapes) {
+        std::visit([](const auto &s) { s.draw(); }, shape);
     }
 }
 

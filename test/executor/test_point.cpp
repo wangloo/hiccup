@@ -18,5 +18,5 @@ TEST_CASE( "Test Point" ) {
         REQUIRE(str != nullptr);
         REQUIRE(strcmp(str, "(1, 2)") == 0);
         free((void*)str);
-    }
+   }
 }
