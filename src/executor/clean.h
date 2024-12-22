@@ -4,12 +4,13 @@
 
 #ifndef CLEAN_H
 #define CLEAN_H
+#include "point.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void clean(int x, int y);
+void clean(Point p);
 
 #ifdef __cplusplus
 }
